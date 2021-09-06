@@ -1,27 +1,16 @@
 import { DeuceResult, Players, ScoreResult, WinnerResult } from '../types'
 import { leader } from './winner'
 import { makeScoreLookup } from './scoreLookup'
+import { makeDeuceResult, makeScoreResult, makeWinnerResult } from './factory'
 
 export function winnerResult (players: Players): WinnerResult {
-  return {
-    winner: leader(players),
-    deuce: false,
-    str_score: null
-  }
+  return makeWinnerResult(leader(players))
 }
 
 export function deuceResult (players: Players): DeuceResult {
-  return {
-    str_score: makeScoreLookup(players),
-    deuce: true,
-    winner: null
-  }
+  return makeDeuceResult(makeScoreLookup(players))
 }
 
 export function scoreResult (players: Players): ScoreResult {
-  return {
-    str_score: makeScoreLookup(players),
-    deuce: false,
-    winner: null
-  }
+  return makeScoreResult(makeScoreLookup(players))
 }

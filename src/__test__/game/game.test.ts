@@ -1,4 +1,4 @@
-import { DeuceResult, Player, score, Score, ScoreResult, WinnerResult } from '../../game/'
+import { makeDeuceResult, makeScoreResult, makeWinnerResult, Player, score, Score } from '../../game/'
 
 describe('game', () => {
   const makePlayer = (points = 0, name = 'player'): Player => ({
@@ -9,10 +9,6 @@ describe('game', () => {
   const makeStrScore = (s1: Score, s2: Score) => `${s1}-${s2}`
 
   describe('no deuces, no winner, only score', () => {
-    const makeScoreResult = (score: string): ScoreResult => (
-      { str_score: score, deuce: false, winner: null }
-    )
-
     const game_matchers = [
       {
         player_1_points: 0,
@@ -71,10 +67,6 @@ describe('game', () => {
   })
 
   describe('when its a deuce game', () => {
-    const makeDeuceResult = (score: string): DeuceResult => (
-      { str_score: score, deuce: true, winner: null }
-    )
-
     const deuces_games = [
       {
         player_1_points: 3,
@@ -93,10 +85,6 @@ describe('game', () => {
   })
 
   describe('when the game has a winner', () => {
-    const makeWinnerResult = (leader: Player): WinnerResult => (
-      { winner: leader, deuce: false, str_score: null }
-    )
-
     it('should return player_1 as the winner', () => {
       const player_1 = makePlayer(4, 'player_1')
       const player_2 = makePlayer(1)
