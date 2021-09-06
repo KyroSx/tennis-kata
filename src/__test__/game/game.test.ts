@@ -32,4 +32,11 @@ describe('game', () => {
 
     expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Forty-Love' })
   })
+
+  it('should return Fifteen-Fifteen if its a 1-1', () => {
+    const player_1 = makePlayer(1)
+    const player_2 = makePlayer(1)
+
+    expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Fifteen-Fifteen' })
+  })
 })

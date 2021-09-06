@@ -1,4 +1,5 @@
 import { Player } from '../types'
+import { scoreLookup } from './scoreLookup'
 
 type ScoreParams = {
   player_1: Player;
@@ -6,25 +7,7 @@ type ScoreParams = {
 }
 
 export function score ({ player_1, player_2 }: ScoreParams) {
-  if (player_1.points === 1) {
-    return {
-      str_score: 'Fifteen-Love'
-    }
-  }
-
-  if (player_1.points === 2) {
-    return {
-      str_score: 'Thirty-Love'
-    }
-  }
-
-  if (player_1.points === 3) {
-    return {
-      str_score: 'Forty-Love'
-    }
-  }
-
   return {
-    str_score: 'Love-Love'
+    str_score: `${scoreLookup(player_1.points)}-${scoreLookup(player_2.points)}`
   }
 }
