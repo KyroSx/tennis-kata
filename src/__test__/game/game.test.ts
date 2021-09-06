@@ -1,4 +1,4 @@
-import { Player, score, Score } from '../../game/'
+import { DeuceResult, Player, score, Score, ScoreResult, WinnerResult } from '../../game/'
 
 describe('game', () => {
   const makePlayer = (points = 0, name = 'player'): Player => ({
@@ -9,6 +9,10 @@ describe('game', () => {
   const makeStrScore = (s1: Score, s2: Score) => `${s1}-${s2}`
 
   describe('no deuces, no winner, only score', () => {
+    const makeScoreResult = (score: string): ScoreResult => (
+      { str_score: score, deuce: false, winner: null }
+    )
+
     const game_matchers = [
       {
         player_1_points: 0,
@@ -62,11 +66,15 @@ describe('game', () => {
       const player_2 = makePlayer(game.player_2_points)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ str_score: game.str_score, deuce: false, winner: null })
+        .toEqual(makeScoreResult(game.str_score))
     })
   })
 
   describe('when its a deuce game', () => {
+    const makeDeuceResult = (score: string): DeuceResult => (
+      { str_score: score, deuce: true, winner: null }
+    )
+
     const deuces_games = [
       {
         player_1_points: 3,
@@ -80,17 +88,21 @@ describe('game', () => {
       const player_2 = makePlayer(game.player_2_points)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ str_score: game.str_score, deuce: true, winner: null })
+        .toEqual(makeDeuceResult(game.str_score))
     })
   })
 
   describe('when the game has a winner', () => {
+    const makeWinnerResult = (leader: Player): WinnerResult => (
+      { winner: leader, deuce: false, str_score: null }
+    )
+
     it('should return player_1 as the winner', () => {
       const player_1 = makePlayer(4, 'player_1')
       const player_2 = makePlayer(1)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ winner: player_1, deuce: false, str_score: null })
+        .toEqual(makeWinnerResult(player_1))
     })
 
     it('should return player_2 as the winner', () => {
@@ -98,7 +110,7 @@ describe('game', () => {
       const player_2 = makePlayer(4, 'player_2')
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ winner: player_2, deuce: false, str_score: null })
+        .toEqual(makeWinnerResult(player_2))
     })
   })
 })
