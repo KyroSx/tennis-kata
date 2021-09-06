@@ -62,7 +62,7 @@ describe('game', () => {
       const player_2 = makePlayer(game.player_2_points)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ str_score: game.str_score })
+        .toEqual({ str_score: game.str_score, deuce: false, winner: null })
     })
   })
 
@@ -80,7 +80,7 @@ describe('game', () => {
       const player_2 = makePlayer(game.player_2_points)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ str_score: game.str_score, deuce: true })
+        .toEqual({ str_score: game.str_score, deuce: true, winner: null })
     })
   })
 
@@ -90,7 +90,7 @@ describe('game', () => {
       const player_2 = makePlayer(1)
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ winner: player_1 })
+        .toEqual({ winner: player_1, deuce: false, score: null })
     })
 
     it('should return player_2 as the winner', () => {
@@ -98,7 +98,7 @@ describe('game', () => {
       const player_2 = makePlayer(4, 'player_2')
 
       expect(score(makeParams(player_1, player_2)))
-        .toEqual({ winner: player_2 })
+        .toEqual({ winner: player_2, deuce: false, score: null })
     })
   })
 })
