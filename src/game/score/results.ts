@@ -1,16 +1,16 @@
-import { Players } from '../types'
+import { DeuceResult, Players, ScoreResult, WinnerResult } from '../types'
 import { leader } from './winner'
 import { makeScoreLookup } from './scoreLookup'
 
-export function winnerResult (players: Players) {
+export function winnerResult (players: Players): WinnerResult {
   return {
     winner: leader(players),
     deuce: false,
-    score: null
+    str_score: null
   }
 }
 
-export function deuceResult (players: Players) {
+export function deuceResult (players: Players): DeuceResult {
   return {
     str_score: makeScoreLookup(players),
     deuce: true,
@@ -18,7 +18,7 @@ export function deuceResult (players: Players) {
   }
 }
 
-export function scoreResult (players: Players) {
+export function scoreResult (players: Players): ScoreResult {
   return {
     str_score: makeScoreLookup(players),
     deuce: false,

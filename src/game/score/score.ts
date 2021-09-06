@@ -1,9 +1,9 @@
-import { Players } from '../types'
+import { GameResult, Players } from '../types'
 import { isDeuce } from './deuce'
 import { hasWinner } from './winner'
 import { deuceResult, scoreResult, winnerResult } from './results'
 
-export function score (players: Players) {
+export function score (players: Players): GameResult {
   if (hasWinner(players)) return winnerResult(players)
   if (isDeuce(players)) return deuceResult(players)
 
