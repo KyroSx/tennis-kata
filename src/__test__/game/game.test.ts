@@ -6,37 +6,55 @@ describe('game', () => {
     points
   })
   const makeParams = (p1: Player, p2: Player) => ({ player_1: p1, player_2: p2 })
-  const defaultParams = () => makeParams(makePlayer(), makePlayer())
 
-  it('should return Love-Love if its a new game', () => {
-    expect(score(defaultParams())).toEqual({ str_score: 'Love-Love' })
-  })
+  const game_matchers = [
+    {
+      player_1_points: 0,
+      player_2_points: 0,
+      str_score: 'Love-Love'
+    },
+    {
+      player_1_points: 1,
+      player_2_points: 0,
+      str_score: 'Fifteen-Love'
+    },
+    {
+      player_1_points: 2,
+      player_2_points: 0,
+      str_score: 'Thirty-Love'
+    },
+    {
+      player_1_points: 3,
+      player_2_points: 0,
+      str_score: 'Forty-Love'
+    },
+    {
+      player_1_points: 0,
+      player_2_points: 1,
+      str_score: 'Love-Fifteen'
+    },
+    {
+      player_1_points: 0,
+      player_2_points: 2,
+      str_score: 'Love-Thirty'
+    },
+    {
+      player_1_points: 0,
+      player_2_points: 3,
+      str_score: 'Love-Forty'
+    },
+    {
+      player_1_points: 1,
+      player_2_points: 1,
+      str_score: 'Fifteen-Fifteen'
+    }
+  ]
 
-  it('should return Fifteen-Love if its a 1-0', () => {
-    const player_1 = makePlayer(1)
-    const player_2 = makePlayer()
+  it.each(game_matchers)('should return the correct score for - %s', (game) => {
+    const player_1 = makePlayer(game.player_1_points)
+    const player_2 = makePlayer(game.player_2_points)
 
-    expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Fifteen-Love' })
-  })
-
-  it('should return Thirty-Love if its a 2-0', () => {
-    const player_1 = makePlayer(2)
-    const player_2 = makePlayer()
-
-    expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Thirty-Love' })
-  })
-
-  it('should return Forty-Love if its a 3-0', () => {
-    const player_1 = makePlayer(3)
-    const player_2 = makePlayer()
-
-    expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Forty-Love' })
-  })
-
-  it('should return Fifteen-Fifteen if its a 1-1', () => {
-    const player_1 = makePlayer(1)
-    const player_2 = makePlayer(1)
-
-    expect(score(makeParams(player_1, player_2))).toEqual({ str_score: 'Fifteen-Fifteen' })
+    expect(score(makeParams(player_1, player_2)))
+      .toEqual({ str_score: game.str_score })
   })
 })
