@@ -1,4 +1,5 @@
-import { score, Player } from '../../game/'
+import { Player, score } from '../../game/'
+import { Score } from '../../game/score/scoreLookup'
 
 describe('game', () => {
   const makePlayer = (points = 0, name = 'player'): Player => ({
@@ -6,47 +7,48 @@ describe('game', () => {
     points
   })
   const makeParams = (p1: Player, p2: Player) => ({ player_1: p1, player_2: p2 })
+  const makeStrScore = (s1: Score, s2: Score) => `${s1}-${s2}`
 
   const game_matchers = [
     {
       player_1_points: 0,
       player_2_points: 0,
-      str_score: 'Love-Love'
+      str_score: makeStrScore(Score.love, Score.love)
     },
     {
       player_1_points: 1,
       player_2_points: 0,
-      str_score: 'Fifteen-Love'
+      str_score: makeStrScore(Score.fifteen, Score.love)
     },
     {
       player_1_points: 2,
       player_2_points: 0,
-      str_score: 'Thirty-Love'
+      str_score: makeStrScore(Score.thirty, Score.love)
     },
     {
       player_1_points: 3,
       player_2_points: 0,
-      str_score: 'Forty-Love'
+      str_score: makeStrScore(Score.forty, Score.love)
     },
     {
       player_1_points: 0,
       player_2_points: 1,
-      str_score: 'Love-Fifteen'
+      str_score: makeStrScore(Score.love, Score.fifteen)
     },
     {
       player_1_points: 0,
       player_2_points: 2,
-      str_score: 'Love-Thirty'
+      str_score: makeStrScore(Score.love, Score.thirty)
     },
     {
       player_1_points: 0,
       player_2_points: 3,
-      str_score: 'Love-Forty'
+      str_score: makeStrScore(Score.love, Score.forty)
     },
     {
       player_1_points: 1,
       player_2_points: 1,
-      str_score: 'Fifteen-Fifteen'
+      str_score: makeStrScore(Score.fifteen, Score.fifteen)
     }
   ]
 
