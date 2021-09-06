@@ -1,5 +1,5 @@
 import { Player, Players } from '../types'
-import { hasEnoughPoints } from './points'
+import { hasEnoughPoints, hasLeadingByTwo } from './points'
 
 const player1HasMorePoints = ({ player_1, player_2 }: Players): boolean =>
   player_1.points > player_2.points
@@ -11,5 +11,5 @@ export function leader (players: Players): Player {
 }
 
 export function hasWinner (players: Players): boolean {
-  return hasEnoughPoints(players)
+  return hasEnoughPoints(players) && hasLeadingByTwo(players)
 }

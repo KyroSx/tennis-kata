@@ -14,3 +14,10 @@ const highestPoint = ({ player_1, player_2 }: Players) =>
 export function hasEnoughPoints (players: Players): boolean {
   return highestPoint(players) >= 4
 }
+
+const pointsDifference = ({ player_1, player_2 }: Players): number =>
+  Math.abs(player_1.points - player_2.points)
+
+export function hasLeadingByTwo (players: Players): boolean {
+  return pointsDifference(players) >= 2
+}

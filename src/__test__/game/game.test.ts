@@ -1,4 +1,12 @@
-import { makeDeuceResult, makeScoreResult, makeWinnerResult, Player, score, Score } from '../../game/'
+import {
+  makeAdvantageResult,
+  makeDeuceResult,
+  makeScoreResult,
+  makeWinnerResult,
+  Player,
+  score,
+  Score
+} from '../../game/'
 
 describe('game', () => {
   const makePlayer = (points = 0, name = 'player'): Player => ({
@@ -99,6 +107,24 @@ describe('game', () => {
 
       expect(score(makeParams(player_1, player_2)))
         .toEqual(makeWinnerResult(player_2))
+    })
+  })
+
+  describe('when the player has advantage after deuce', () => {
+    it('should return player_1 as the advantage', () => {
+      const player_1 = makePlayer(4, 'player_1')
+      const player_2 = makePlayer(3)
+
+      expect(score(makeParams(player_1, player_2)))
+        .toEqual(makeAdvantageResult(player_1))
+    })
+
+    it('should return player_2 as the advantage', () => {
+      const player_1 = makePlayer(4, 'player_1')
+      const player_2 = makePlayer(5)
+
+      expect(score(makeParams(player_1, player_2)))
+        .toEqual(makeAdvantageResult(player_2))
     })
   })
 })
