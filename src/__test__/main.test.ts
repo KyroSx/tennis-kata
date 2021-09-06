@@ -1,5 +1,5 @@
-import { add } from "../main";
+import { add } from '../main'
 
-test("it should run", () => {
-    expect(add()).toBe(4)
+test('it should run', () => {
+  expect(add()).toBe(4)
 })
