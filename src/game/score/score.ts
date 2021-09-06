@@ -18,6 +18,12 @@ export function score ({ player_1, player_2 }: ScoreParams) {
     }
   }
 
+  if (player_1.points === 3) {
+    return {
+      str_score: 'Forty-Love'
+    }
+  }
+
   return {
     str_score: 'Love-Love'
   }
