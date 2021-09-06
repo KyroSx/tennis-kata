@@ -1,3 +1,5 @@
+import { Player, Players } from '../types'
+
 export enum Score {
     love = 'Love',
     fifteen = 'Fifteen',
@@ -18,4 +20,11 @@ const SCORE_LOOKUP: Lookup = {
 
 export function scoreLookup (point: number): Score {
   return SCORE_LOOKUP[point] as Score
+}
+
+const getPoints = (player: Player) => scoreLookup(player.points)
+const asStrScore = (point_1: Score, point_2: Score) => `${point_1}-${point_2}`
+
+export function makeScoreLookup ({ player_1, player_2 }: Players) {
+  return asStrScore(getPoints(player_1), getPoints(player_2))
 }
