@@ -49,6 +49,11 @@ describe('game', () => {
       player_1_points: 1,
       player_2_points: 1,
       str_score: makeStrScore(Score.fifteen, Score.fifteen)
+    },
+    {
+      player_1_points: 2,
+      player_2_points: 2,
+      str_score: makeStrScore(Score.thirty, Score.thirty)
     }
   ]
 
@@ -58,5 +63,21 @@ describe('game', () => {
 
     expect(score(makeParams(player_1, player_2)))
       .toEqual({ str_score: game.str_score })
+  })
+
+  const deuces_games = [
+    {
+      player_1_points: 3,
+      player_2_points: 3,
+      str_score: makeStrScore(Score.forty, Score.forty)
+    }
+  ]
+
+  it.each(deuces_games)('should return deuce and score for - %s', (game) => {
+    const player_1 = makePlayer(game.player_1_points)
+    const player_2 = makePlayer(game.player_2_points)
+
+    expect(score(makeParams(player_1, player_2)))
+      .toEqual({ str_score: game.str_score, deuce: true })
   })
 })
