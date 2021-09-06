@@ -1,5 +1,4 @@
-import { Player, score } from '../../game/'
-import { Score } from '../../game/score/scoreLookup'
+import { Player, score, Score } from '../../game/'
 
 describe('game', () => {
   const makePlayer = (points = 0, name = 'player'): Player => ({
