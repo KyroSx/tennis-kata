@@ -8,7 +8,7 @@ export function makeScoreResult (score: string): ScoreResult {
   }
 }
 
-export function makeDeuceResult (score: string): DeuceResult {
+export function makeDeuceResult (score: string | null): DeuceResult {
   return {
     str_score: score,
     deuce: true,

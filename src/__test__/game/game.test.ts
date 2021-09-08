@@ -80,6 +80,11 @@ describe('game', () => {
         player_1_points: 3,
         player_2_points: 3,
         str_score: makeStrScore(Score.forty, Score.forty)
+      },
+      {
+        player_1_points: 5,
+        player_2_points: 5,
+        str_score: null
       }
     ]
 

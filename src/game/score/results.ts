@@ -16,5 +16,5 @@ export function advantageResult (players: Players): AdvantageResult {
 }
 
 export function scoreResult (players: Players): ScoreResult {
-  return makeScoreResult(makeScoreLookup(players))
+  return makeScoreResult(makeScoreLookup(players)!)
 }

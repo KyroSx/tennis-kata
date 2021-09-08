@@ -16,7 +16,7 @@ export type WinnerResult = {
 
 export type DeuceResult = {
     winner: null;
-    str_score: string;
+    str_score: string | null;
     deuce: true;
 }
 

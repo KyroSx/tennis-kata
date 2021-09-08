@@ -25,6 +25,15 @@ export function scoreLookup (point: number): Score {
 const getPoints = (player: Player) => scoreLookup(player.points)
 const asStrScore = (point_1: Score, point_2: Score) => `${point_1}-${point_2}`
 
-export function makeScoreLookup ({ player_1, player_2 }: Players) {
-  return asStrScore(getPoints(player_1), getPoints(player_2))
+const isPointValid = ({ points }: Player) => points >= 0 && points <= 4
+const isAllPointsValid = ({ player_1, player_2 }: Players) =>
+  isPointValid(player_1) && isPointValid(player_2)
+
+export function makeScoreLookup (players: Players) {
+  if (!isAllPointsValid(players)) return null
+
+  return asStrScore(
+    getPoints(players.player_1),
+    getPoints(players.player_2)
+  )
 }
